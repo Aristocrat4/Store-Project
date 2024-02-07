@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { CheckoutProductCardComponent } from '../checkout-product-card/checkout-product-card.component';
+import { CheckoutProductCardComponent } from '../../ui/checkout-product-card/checkout-product-card.component';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
