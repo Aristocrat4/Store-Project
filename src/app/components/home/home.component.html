@@ -1,1 +1,31 @@
 <app-carousel></app-carousel>
+<div class="flex-col justify-center items-center">
+  <div class="product-header w-full flex justify-center items-center mb-4">
+    <div class="flex w-[90%] items-center justify-between">
+      <div>
+        <h1 class="text-2xl !m-0">All Product</h1>
+      </div>
+      <div
+        class="flex items-center justify-around w-[140px] h-[40px] p-2 border-black border"
+      >
+        <span>Filter & Sort</span
+        ><svg
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv w-[24px]"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          data-testid="TuneIcon"
+        >
+          <path
+            d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z"
+          ></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="product-card w-full flex justify-center items-center">
+    <div class="flex w-[90%] items-center justify-between flex-wrap">
+        <app-card *ngFor="let pro of products"></app-card>
+    </div>
+  </div>
+</div>
