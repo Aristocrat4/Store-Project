@@ -1,0 +1,53 @@
+<ng-container *ngIf="cart.length; else emptyCart">
+  <div class="container my-0 mx-auto">
+    <div class="flex justify-between items-start">
+      <h2 class="font-bold !text-4xl uppercase">your bag</h2>
+      <a class="underline font-medium text-lg uppercase" href="#"
+        >login and checkout faster</a
+      >
+    </div>
+    <div class="checkout-wrapper flex justify-around max-lg:flex-col">
+      <div class="checkout-left flex flex-col gap-4">
+        <span class="text-xl"
+          >TOTAL: ({{ cart.length }} items) ${{ totalPrice }}</span
+        >
+        <p class="text-lg">
+          Items in your bag are not reserved - check out now to make them yours.
+        </p>
+        <div *ngFor="let item of cart">
+          <app-checkout-product-card></app-checkout-product-card>
+        </div>
+      </div>
+      <div class="checkout-right min-w-[30%] text-end">
+        <div
+          class="order-summary font-light mt-12 border border-gray-300 py-4 px-4 uppercase gap-4 text-xl grid grid-cols-2"
+        >
+          <span class="col-span-2 font-medium text-2xl text-start"
+            >order summary</span
+          >
+          <span class="text-start">original price</span>
+          <span class="text-end">$775.00</span>
+          <span class="text-start">sale</span>
+          <span class="text-end">-$26.00</span>
+          <span class="text-start">5 items</span>
+          <span class="text-end">$749.00</span>
+          <span class="text-start">delivery</span>
+          <span class="text-end">free</span>
+          <span class="text-start capitalize">sales tax</span>
+          <span class="text-end">-</span>
+          <span class="text-start font-medium">total</span>
+          <span class="text-end font-medium">$749.00</span>
+        </div>
+        <button
+          class="w-full bg-black text-white text-xl flex justify-between uppercase p-3 tracking-widest mt-5"
+        >
+          checkout
+          <mat-icon>arrow_right_alt</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-template #emptyCart>
+  <div>hey</div>
+</ng-template>
