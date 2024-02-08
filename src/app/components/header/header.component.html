@@ -32,7 +32,7 @@
         >UNISEX</a
       >
     </div>
-    <div class="flex items-center gap-2 lg:flex lg:flex-1 lg:justify-end">
+    <div class="flex md:items-center gap-2 lg:flex lg:flex-1 lg:justify-end">
       <div
         class="hidden example-form-field relative max-w-[12.5rem] w-[90%] md:block"
       >
@@ -47,8 +47,12 @@
       <div class="md:hidden">
         <mat-icon (click)="onSearchIcon()"> search </mat-icon>
       </div>
-      <mat-icon (click)="onLogin()"> person_outline </mat-icon>
-      <mat-icon> local_mall </mat-icon>
+      <div class="cursor-pointer">
+        <mat-icon (click)="onLogin()"> person_outline </mat-icon>
+      </div>
+      <div (click)="onBasket()" class="cursor-pointer">
+        <mat-icon> local_mall </mat-icon>
+      </div>
     </div>
   </nav>
   <div

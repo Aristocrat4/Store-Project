@@ -1,5 +1,6 @@
 <section class="flex justify-center pt-10 pb-6">
   <div
+    *ngIf="!showSignUp"
     class="auth-forms w-[90%] max-w-[28.125rem] md:border md:border-black md:px-4 md:py-10"
   >
     <h3 class="!text-4xl uppercase">log in</h3>
@@ -36,9 +37,79 @@
         <mat-icon>arrow_right_alt</mat-icon>
       </button>
       <button
+        (click)="onSignUp()"
         class="w-fit bg-black text-white text-lg flex justify-between uppercase p-3 tracking-widest mt-5 md:w-fit md:gap-14"
       >
         sign up
+      </button>
+    </form>
+  </div>
+  <div
+    *ngIf="showSignUp"
+    class="auth-forms w-[90%] max-w-[28.125rem] md:border md:border-black md:px-4 md:py-10"
+  >
+    <h3 class="!text-4xl uppercase">sign up</h3>
+    <form class="example-form flex flex-col">
+      <mat-form-field>
+        <mat-label>First Name</mat-label>
+        <input
+          matInput
+          placeholder="Your Name"
+          [formControl]="firstname"
+          required
+        />
+        @if (firstname.invalid) {
+        <mat-error>Invalid Name</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input
+          matInput
+          placeholder="Your Lastname"
+          [formControl]="lastname"
+          required
+        />
+        @if (lastname.invalid) {
+        <mat-error>Invalid lastname</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Enter your email</mat-label>
+        <input
+          matInput
+          placeholder="pat@example.com"
+          [formControl]="email"
+          required
+        />
+        @if (email.invalid) {
+        <mat-error>{{ getErrorMessage() }}</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <button
+        class="w-fit bg-black text-white text-lg flex justify-between uppercase p-3 tracking-widest mt-5 md:mt-0 md:w-fit md:gap-14"
+      >
+        log in
+        <mat-icon>arrow_right_alt</mat-icon>
+      </button>
+      <button
+        (click)="onSignIn()"
+        class="w-fit bg-black text-white text-lg flex justify-between uppercase p-3 tracking-widest mt-5 md:w-fit md:gap-14"
+      >
+        sign in
       </button>
     </form>
   </div>

@@ -23,4 +23,7 @@ export class HeaderComponent {
   onSearchIcon() {
     this.searchMobile = !this.searchMobile;
   }
+  onBasket() {
+    this.route.navigate(['checkout']);
+  }
 }
