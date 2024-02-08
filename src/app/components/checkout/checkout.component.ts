@@ -11,6 +11,6 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './checkout.component.scss',
 })
 export class CheckoutComponent {
-  cart = [];
+  cart = [1];
   totalPrice = 400;
 }
