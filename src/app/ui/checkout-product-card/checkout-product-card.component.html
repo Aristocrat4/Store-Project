@@ -2,29 +2,25 @@
   class="checkout-product-card md:border md:border-black max-lg:w-[98%] w-[90%] flex"
 >
   <div class="max-w-[35%]">
-    <img
-      class="h-auto"
-      src="https://jishkariani-shopping-cart.netlify.app/img/b174bd7c569847f8b42dadee014665f3_9366.webp"
-      alt="product-image"
-    />
+    <img class="h-auto" src="{{ product.image }}" alt="product-image" />
   </div>
-  <div class="product-details py-3 px-5 flex relative flex-col">
+  <div class="product-details py-3 px-5 flex relative flex-col w-full">
     <div class="title-price flex justify-between mb-2">
-      <h3 class="uppercase !text-base md:!text-xl !m-0">NMD_V3 shoes</h3>
-      <span class="text-base md:text-xl md:mr-6">$320.00</span>
+      <h3 class="uppercase !text-base md:!text-xl !m-0">{{ product.title }}</h3>
+      <span class="text-base md:text-xl md:mr-6">${{ product.price }}</span>
     </div>
     <p class="uppercase text-sm flex-1">
-      innovative sneakers made in part with parley ocean plastic.
+      {{ product.description }}
     </p>
     <div
       class="quantity-counter md:border py-1 md:py-3 px-4 md:border-black flex gap-3 w-fit items-center"
     >
       <mat-icon>remove</mat-icon>
-      <span class="text-lg md:text-2xl">0</span>
+      <span class="text-lg md:text-2xl">{{ product.quantity }}</span>
       <mat-icon>add</mat-icon>
     </div>
     <div class="close-icon absolute top-0 -right-2 md:top-2 md:right-2">
-      <mat-icon>close</mat-icon>
+      <mat-icon (click)="onRemove(product.id)">close</mat-icon>
     </div>
   </div>
 </div>

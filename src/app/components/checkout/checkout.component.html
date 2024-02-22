@@ -1,5 +1,5 @@
-<ng-container *ngIf="cart.length; else emptyCart">
-  <div class="container my-0 mx-auto pt-8 !max-w-[90%] md:pt-12">
+<ng-container *ngIf="cart$ | async as cart; else emptyCart">
+  <div class="container my-0 mx-auto pt-8 !w-[90%] md:pt-12">
     <div class="flex justify-between items-center mb-4">
       <h2 class="font-bold !text-2xl uppercase !mb-0">your bag</h2>
       <a class="underline font-medium text-base uppercase" href="#"
@@ -9,13 +9,17 @@
     <div class="checkout-wrapper flex justify-around max-lg:flex-col">
       <div class="checkout-left flex flex-col gap-4">
         <span class="text-xl"
-          >TOTAL: ({{ cart.length }} items) ${{ totalPrice }}</span
+          >TOTAL: ({{ cart.length }} items) ${{
+            calculateTotalPrice$ | async
+          }}</span
         >
         <p class="text-lg">
           Items in your bag are not reserved - check out now to make them yours.
         </p>
         <div *ngFor="let item of cart">
-          <app-checkout-product-card></app-checkout-product-card>
+          <app-checkout-product-card
+            [product]="item"
+          ></app-checkout-product-card>
         </div>
       </div>
       <div class="checkout-right min-w-[30%] text-end">
@@ -26,17 +30,19 @@
             >order summary</span
           >
           <span class="text-start">original price</span>
-          <span class="text-end">$775.00</span>
+          <span class="text-end">${{ calculateOriginalPrice$ | async }}</span>
           <span class="text-start">sale</span>
-          <span class="text-end">-$26.00</span>
-          <span class="text-start">5 items</span>
-          <span class="text-end">$749.00</span>
+          <span *ngIf="saleAndDelivery$ | async as sale" class="text-end"
+            >-${{ sale.sale }}</span
+          >
           <span class="text-start">delivery</span>
-          <span class="text-end">free</span>
-          <span class="text-start capitalize">sales tax</span>
-          <span class="text-end">-</span>
+          <span *ngIf="saleAndDelivery$ | async as sale" class="text-end">{{
+            sale.delivery
+          }}</span>
           <span class="text-start font-medium">total</span>
-          <span class="text-end font-medium">$749.00</span>
+          <span class="text-end font-medium"
+            >${{ calculateTotalPrice$ | async }}</span
+          >
         </div>
         <button
           class="w-full bg-black text-white text-xl flex justify-between uppercase p-3 tracking-widest mt-5"

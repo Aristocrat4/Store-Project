@@ -7,6 +7,6 @@ import { AuthComponent } from './components/auth/auth.component';
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'checkout', component: CheckoutComponent },
-  { path: 'product', component: ProductDetailsComponent },
+  { path: 'product/:id', component: ProductDetailsComponent },
   { path: 'auth', component: AuthComponent },
 ];

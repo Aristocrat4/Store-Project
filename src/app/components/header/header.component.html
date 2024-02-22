@@ -13,9 +13,9 @@
         <a (click)="onLogo()" class="-m-1.5 p-1.5">
           <span class="sr-only">Your Company</span>
           <img
-            class="h-8 w-auto"
-            src="https://yt3.googleusercontent.com/ytc/AIf8zZQot8Hbc4Y8t0mHVRCAIIt5gmWF3-qSCgy-lvlM=s900-c-k-c0x00ffffff-no-rj"
-            alt=""
+            class="h-auto w-[13.125rem]"
+            src="../../assets/collusionlogo.png"
+            alt="logo"
           />
         </a>
       </div>
@@ -50,8 +50,15 @@
       <div class="cursor-pointer">
         <mat-icon (click)="onLogin()"> person_outline </mat-icon>
       </div>
-      <div (click)="onBasket()" class="cursor-pointer">
+      <div (click)="onBasket()" class="cursor-pointer relative">
         <mat-icon> local_mall </mat-icon>
+        @if (cart$ | async; as cart) { @if (cart.length) {
+
+        <span
+          class="absolute -top-1 -right-2 w-4 h-4 rounded-[50%] bg-red-600 text-white flex justify-center items-center"
+          >{{ cart.length }}</span
+        >
+        } }
       </div>
     </div>
   </nav>

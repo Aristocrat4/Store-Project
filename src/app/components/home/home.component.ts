@@ -3,18 +3,36 @@ import { CarouselComponent } from '../../ui/carousel/carousel.component';
 import { CardComponent } from '../../ui/card/card.component';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import {
+  loadProducts,
+  loadSingleProduct,
+} from '../../state/products/products.actions';
+import { selectProducts } from '../../state/products/products.selectors';
+import { Product, ProductState } from '../../state/products/products.model';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Observable, delay } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CarouselComponent, CardComponent, CommonModule],
+  imports: [
+    CarouselComponent,
+    CardComponent,
+    CommonModule,
+    MatProgressSpinnerModule,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  products = Array(16);
-  constructor(private router: Router) {}
-  onCard() {
-    this.router.navigate(['product']);
+  products$: Observable<ProductState> = this.store.select(selectProducts);
+  constructor(private router: Router, private store: Store) {}
+  onCard(product: Product) {
+    const url = 'product/' + product.id;
+    this.router.navigate([url]);
+  }
+  ngOnInit() {
+    this.store.dispatch(loadProducts());
   }
 }

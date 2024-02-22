@@ -1,17 +1,22 @@
 <div
-  class="group product-item w-full border border-transparent cursor-pointer transition hover:border-gray-400 transition-all"
+  class="group product-item w-full border border-transparent cursor-pointer hover:border-gray-400 transition-all"
 >
-  <div class="w-fit">
+  <div>
     <img
-      src="https://jishkariani-shopping-cart.netlify.app/img/b174bd7c569847f8b42dadee014665f3_9366.webp"
+      class="h-[25rem] max-h-[28.125rem] w-full"
+      src="{{ product?.image }}"
       alt="shoes"
     />
-    <div class="top-[-25px] ml-[5px] relative group-hover:top-[-35px] transition-all">
-      <span class="current-price bg-white p-1 absolute">$160</span>
+    <div
+      class="top-[-25px] ml-[5px] relative group-hover:top-[-35px] transition-all"
+    >
+      <span class="current-price bg-white p-1 absolute"
+        >${{ product?.price }}</span
+      >
     </div>
   </div>
   <div class="product-info p-2 flex-col justify-center align-center">
-    <h5 class="product-name !m-0 !text-sm">NMD_V3 SHOES</h5>
-    <p class="opacity-80 !my-1 text-sm">Originals</p>
+    <h5 class="product-name !m-0 !text-sm">{{ product?.title }}</h5>
+    <p class="opacity-80 !my-1 text-sm">{{ product?.category }}</p>
   </div>
 </div>
