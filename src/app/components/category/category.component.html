@@ -1,1 +1,63 @@
-<p *ngFor="let item of (products$ | async)?.products">category works!</p>
+<div class="flex-col justify-center items-center container mx-auto pb-10">
+  <div class="product-header w-full flex justify-center items-center mb-4">
+    <div class="flex w-[98%] items-center justify-between pt-3 pb-3">
+      <div>
+        <h1
+          class="text-2xl !m-0 !font-normal !drop-shadow-sm uppercase !roboto"
+        >
+          {{ categoryname }}
+        </h1>
+      </div>
+      <div
+        (click)="onFilter()"
+        class="cursor-pointer flex items-center justify-around w-[140px] h-[40px] p-2 border-black border relative"
+      >
+        <span>Filter & Sort</span
+        ><svg
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv w-[24px]"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          data-testid="TuneIcon"
+        >
+          <path
+            d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z"
+          ></path>
+        </svg>
+        @if (showFilter) {
+        <div
+          class="w-full p-3 absolute bg-white flex flex-col gap-3 border border-black -bottom-24 left-0"
+        >
+          <span (click)="onHighToLow()" class="cursor-pointer hover:scale-110"
+            >Price (high-low)</span
+          >
+          <span (click)="onLowToHigh()" class="cursor-pointer hover:scale-110"
+            >Price (low-high)</span
+          >
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+  <div class="product-card w-full flex justify-center items-center">
+    <div class="flex w-[98%] gap-1 items-center flex-wrap justify-between">
+      <div
+        *ngIf="(products$ | async)?.loading"
+        class="w-full flex justify-center items-center"
+      >
+        <mat-spinner></mat-spinner>
+      </div>
+      <div
+        class="flex w-[98%] gap-1 items-center flex-wrap"
+        *ngIf="!(products$ | async)?.loading"
+      >
+        <app-card
+          *ngFor="let product of (products$ | async)?.products"
+          (click)="onCard(product)"
+          class="w-[24.75%] max-xl:w-[33%] max-lg:w-[49.5%] max-sm:w-[99%]"
+          [product]="product"
+        ></app-card>
+      </div>
+    </div>
+  </div>
+</div>

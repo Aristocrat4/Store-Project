@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CarouselComponent } from '../../ui/carousel/carousel.component';
 import { CardComponent } from '../../ui/card/card.component';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -13,12 +12,7 @@ import { Observable, map, of } from 'rxjs';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [
-    CarouselComponent,
-    CardComponent,
-    CommonModule,
-    MatProgressSpinnerModule,
-  ],
+  imports: [CardComponent, CommonModule, MatProgressSpinnerModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -39,7 +33,7 @@ export class HomeComponent {
   onHighToLow() {
     this.products$ = this.products$.pipe(
       map((product) => {
-        let sortedArr = [...product.products].sort((a, b) => a.price - b.price);
+        let sortedArr = [...product.products].sort((a, b) => b.price - a.price);
         return { ...product, products: sortedArr };
       })
     );
@@ -47,7 +41,7 @@ export class HomeComponent {
   onLowToHigh() {
     this.products$ = this.products$.pipe(
       map((product) => {
-        let sortedArr = [...product.products].sort((a, b) => b.price - a.price);
+        let sortedArr = [...product.products].sort((a, b) => a.price - b.price);
         return { ...product, products: sortedArr };
       })
     );
