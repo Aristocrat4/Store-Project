@@ -1,58 +1,61 @@
-<ng-container *ngIf="cart$ | async as cart; else emptyCart">
-  <div class="container my-0 mx-auto pt-8 !w-[90%] md:pt-12">
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="font-bold !text-2xl uppercase !mb-0">your bag</h2>
-      <a class="underline font-medium text-base uppercase" href="#"
-        >login and checkout faster</a
-      >
-    </div>
-    <div class="checkout-wrapper flex justify-around max-lg:flex-col">
-      <div class="checkout-left flex flex-col gap-4">
-        <span class="text-xl"
-          >TOTAL: ({{ cart.length }} items) ${{
-            calculateTotalPrice$ | async
-          }}</span
+<ng-container *ngIf="(cart$ | async)?.length; else emptyCart">
+  <ng-container *ngIf="cart$ | async as cart">
+    <div class="container my-0 mx-auto pt-8 !w-[90%] md:pt-12">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="font-bold !text-2xl uppercase !mb-0">your bag</h2>
+        <a class="underline font-medium text-base uppercase" href="#"
+          >login and checkout faster</a
         >
-        <p class="text-lg">
-          Items in your bag are not reserved - check out now to make them yours.
-        </p>
-        <div *ngFor="let item of cart">
-          <app-checkout-product-card
-            [product]="item"
-          ></app-checkout-product-card>
+      </div>
+      <div class="checkout-wrapper flex justify-around max-lg:flex-col">
+        <div class="checkout-left flex flex-col gap-4">
+          <span class="text-xl"
+            >TOTAL: ({{ cart.length }} items) ${{
+              calculateTotalPrice$ | async
+            }}</span
+          >
+          <p class="text-lg">
+            Items in your bag are not reserved - check out now to make them
+            yours.
+          </p>
+          <div *ngFor="let item of cart">
+            <app-checkout-product-card
+              [product]="item"
+            ></app-checkout-product-card>
+          </div>
+        </div>
+        <div class="checkout-right min-w-[30%] text-end">
+          <div
+            class="order-summary font-light mt-12 border border-gray-300 py-4 px-4 uppercase gap-4 text-base md:text-lg grid grid-cols-2"
+          >
+            <span class="col-span-2 font-medium text-lg md:text-xl text-start"
+              >order summary</span
+            >
+            <span class="text-start">original price</span>
+            <span class="text-end">${{ calculateOriginalPrice$ | async }}</span>
+            <span class="text-start">sale</span>
+            <span *ngIf="saleAndDelivery$ | async as sale" class="text-end"
+              >-${{ sale.sale }}</span
+            >
+            <span class="text-start">delivery</span>
+            <span *ngIf="saleAndDelivery$ | async as sale" class="text-end">{{
+              sale.delivery
+            }}</span>
+            <span class="text-start font-medium">total</span>
+            <span class="text-end font-medium"
+              >${{ calculateTotalPrice$ | async }}</span
+            >
+          </div>
+          <button
+            class="w-full bg-black text-white text-xl flex justify-between uppercase p-3 tracking-widest mt-5"
+          >
+            checkout
+            <mat-icon>arrow_right_alt</mat-icon>
+          </button>
         </div>
       </div>
-      <div class="checkout-right min-w-[30%] text-end">
-        <div
-          class="order-summary font-light mt-12 border border-gray-300 py-4 px-4 uppercase gap-4 text-base md:text-lg grid grid-cols-2"
-        >
-          <span class="col-span-2 font-medium text-lg md:text-xl text-start"
-            >order summary</span
-          >
-          <span class="text-start">original price</span>
-          <span class="text-end">${{ calculateOriginalPrice$ | async }}</span>
-          <span class="text-start">sale</span>
-          <span *ngIf="saleAndDelivery$ | async as sale" class="text-end"
-            >-${{ sale.sale }}</span
-          >
-          <span class="text-start">delivery</span>
-          <span *ngIf="saleAndDelivery$ | async as sale" class="text-end">{{
-            sale.delivery
-          }}</span>
-          <span class="text-start font-medium">total</span>
-          <span class="text-end font-medium"
-            >${{ calculateTotalPrice$ | async }}</span
-          >
-        </div>
-        <button
-          class="w-full bg-black text-white text-xl flex justify-between uppercase p-3 tracking-widest mt-5"
-        >
-          checkout
-          <mat-icon>arrow_right_alt</mat-icon>
-        </button>
-      </div>
     </div>
-  </div>
+  </ng-container>
 </ng-container>
 <ng-template #emptyCart>
   <div class="container mx-auto pt-8">
@@ -62,6 +65,7 @@
       started?
     </p>
     <button
+      (click)="onGetStarted()"
       class="bg-black text-white text-xl flex justify-between uppercase p-3 tracking-widest mt-5"
     >
       get started

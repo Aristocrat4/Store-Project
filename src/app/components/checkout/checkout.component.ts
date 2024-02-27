@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { selectUserCart } from '../../state/cart/cart.selectors';
 import { map, switchMap, tap } from 'rxjs';
 import { selectSale } from '../../state/sale/sale.selectors';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -15,7 +16,7 @@ import { selectSale } from '../../state/sale/sale.selectors';
   styleUrl: './checkout.component.scss',
 })
 export class CheckoutComponent {
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router) {}
   cart$ = this.store.select(selectUserCart);
   calculateOriginalPrice$ = this.cart$.pipe(
     map((products) =>
@@ -47,4 +48,7 @@ export class CheckoutComponent {
       );
     })
   );
+  onGetStarted() {
+    this.router.navigate(['']);
+  }
 }
