@@ -15,9 +15,19 @@
     <div
       class="quantity-counter md:border py-1 md:py-3 px-4 md:border-black flex gap-3 w-fit items-center"
     >
-      <mat-icon>remove</mat-icon>
+      <div
+        (click)="decreaseQuantity(product)"
+        class="flex justify-center items-center"
+      >
+        <mat-icon>remove</mat-icon>
+      </div>
       <span class="text-lg md:text-2xl">{{ product.quantity }}</span>
-      <mat-icon>add</mat-icon>
+      <div
+        (click)="increaseQuantity(product)"
+        class="flex justify-center items-center"
+      >
+        <mat-icon>add</mat-icon>
+      </div>
     </div>
     <div class="close-icon absolute top-0 -right-2 md:top-2 md:right-2">
       <mat-icon (click)="onRemove(product.id)">close</mat-icon>

@@ -19,4 +19,22 @@ export class CheckoutProductCardComponent {
       CartActions['[CART]RemoveItemFromCart']({ itemId: id })
     );
   }
+  decreaseQuantity(product: CartItem) {
+    if (product.quantity > 1) {
+      this.store.dispatch(
+        CartActions['[CART]DecreaseItemQuantity']({
+          item: product,
+        })
+      );
+    }
+  }
+  increaseQuantity(product: CartItem) {
+    if (product) {
+      this.store.dispatch(
+        CartActions['[CART]IncreaseItemQuantity']({
+          item: product,
+        })
+      );
+    }
+  }
 }

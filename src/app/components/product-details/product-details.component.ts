@@ -37,8 +37,6 @@ export class ProductDetailsComponent implements OnInit {
   }
   addToCart(product: CartItem) {
     if (product) {
-      const createuserId = Math.random() * 100;
-      console.log(product);
       this.store.dispatch(
         CartActions['[CART]AddItemToCart']({
           item: { ...product, quantity: this.quantity },

@@ -32,6 +32,30 @@ export const cartReducer = createReducer(
       ];
     }
   }),
+  on(CartActions['[CART]IncreaseItemQuantity'], (state, { item }) => {
+    return state.map((product) => {
+      if (item.id === product.id) {
+        return {
+          ...product,
+          quantity: product.quantity + 1,
+        };
+      } else {
+        return product;
+      }
+    });
+  }),
+  on(CartActions['[CART]DecreaseItemQuantity'], (state, { item }) => {
+    return state.map((product) => {
+      if (item.id === product.id) {
+        return {
+          ...product,
+          quantity: product.quantity - 1,
+        };
+      } else {
+        return product;
+      }
+    });
+  }),
   on(CartActions['[CART]RemoveItemFromCart'], (state, { itemId }) =>
     state.filter((item) => item.id !== itemId)
   )
