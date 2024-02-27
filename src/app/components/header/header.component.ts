@@ -5,8 +5,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { selectCartFeature } from '../../state/cart/cart.selectors';
-import { Observable } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { CartItem } from '../../state/cart/cart.state';
+import { loadCategories } from '../../state/categories/categories.actions';
+import { selectCategoryFeature } from '../../state/categories/categories.selector';
+import { CategoryState } from '../../state/categories/categories.state';
 
 @Component({
   selector: 'app-header',
@@ -18,6 +21,9 @@ import { CartItem } from '../../state/cart/cart.state';
 export class HeaderComponent {
   searchMobile = false;
   cart$: Observable<CartItem[]> = this.store.select(selectCartFeature);
+  categories$: Observable<CategoryState> = this.store.select(
+    selectCategoryFeature
+  );
   constructor(private route: Router, private store: Store) {}
   onLogin() {
     this.route.navigate(['auth']);
@@ -30,5 +36,11 @@ export class HeaderComponent {
   }
   onBasket() {
     this.route.navigate(['checkout']);
+  }
+  ngOnInit() {
+    this.store.dispatch(loadCategories());
+  }
+  onCategory(category: string) {
+    this.route.navigate([`category/${category}`]);
   }
 }

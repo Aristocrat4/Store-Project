@@ -26,3 +26,9 @@ export interface SingleProductState {
   loading: boolean;
   error: any;
 }
+
+export interface ProductsByCategoryState {
+  products: Product[];
+  loading: boolean;
+  error: any;
+}

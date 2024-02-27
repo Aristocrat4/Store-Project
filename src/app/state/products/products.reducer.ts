@@ -1,6 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 import * as ProductActions from './products.actions';
-import { Product, ProductState, SingleProductState } from './products.model';
+import {
+  Product,
+  ProductState,
+  ProductsByCategoryState,
+  SingleProductState,
+} from './products.model';
 
 export const productsFeatureKey = 'products';
 
@@ -14,6 +19,12 @@ export const initialState: ProductState = {
 
 export const initialSinglePageState: SingleProductState = {
   product: null,
+  loading: false,
+  error: null,
+};
+
+export const initialProductsByCategoryState: ProductsByCategoryState = {
+  products: [],
   loading: false,
   error: null,
 };
@@ -53,6 +64,26 @@ export const singleProductReducer = createReducer(
     error: null,
   })),
   on(ProductActions.loadSingleProductFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }))
+);
+
+export const productsByCategoryReducer = createReducer(
+  initialProductsByCategoryState,
+  on(ProductActions.loadProductsByCategory, (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  })),
+  on(ProductActions.loadProductsByCategorySuccess, (state, { products }) => ({
+    ...state,
+    products,
+    loading: false,
+    error: null,
+  })),
+  on(ProductActions.loadProductsByCategoryFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error,

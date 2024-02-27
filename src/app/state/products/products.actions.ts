@@ -22,3 +22,15 @@ export const loadSingleProductFailure = createAction(
   'Load Single Product Failure',
   props<{ error: unknown }>()
 );
+export const loadProductsByCategory = createAction(
+  'Load Products By Category',
+  props<{ category: string }>()
+);
+export const loadProductsByCategorySuccess = createAction(
+  'Load Products By Category Success',
+  props<{ products: Product[] }>()
+);
+export const loadProductsByCategoryFailure = createAction(
+  'Load Products By Category Failure',
+  props<{ error: unknown }>()
+);

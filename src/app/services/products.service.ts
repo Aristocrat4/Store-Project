@@ -8,6 +8,8 @@ import { Product } from '../state/products/products.model';
 })
 export class ProductsService {
   private productsAPI = 'https://fakestoreapi.com/products';
+  private singleCategoryProductsAPI =
+    'https://fakestoreapi.com/products/category/';
 
   constructor(private http: HttpClient) {}
 
@@ -22,6 +24,12 @@ export class ProductsService {
     return this.http
       .get<Product>(api)
       .pipe(catchError(this.handleError<Product>('getSingleProduct')));
+  }
+
+  getProductsByCategory(category: string): Observable<Product[]> {
+    return this.http.get<Product[]>(
+      `${this.singleCategoryProductsAPI}${category}`
+    );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

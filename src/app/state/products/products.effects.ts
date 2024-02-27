@@ -35,6 +35,21 @@ export class ProductsEffects {
       })
     );
   });
+
+  loadProductsByCategory$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProductActions.loadProductsByCategory),
+      mergeMap((category) =>
+        this.productService.getProductsByCategory(category.category).pipe(
+          map((products) =>
+            ProductActions.loadProductsByCategorySuccess({
+              products,
+            })
+          )
+        )
+      )
+    )
+  );
   constructor(
     private actions$: Actions,
     private productService: ProductsService

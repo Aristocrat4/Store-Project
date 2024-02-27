@@ -12,10 +12,13 @@ import { EffectsModule } from '@ngrx/effects';
 import { ProductsEffects } from './app/state/products/products.effects';
 import {
   productReducer,
+  productsByCategoryReducer,
   singleProductReducer,
 } from './app/state/products/products.reducer';
 import { cartReducer } from './app/state/cart/cart.reducer';
 import { saleReducer } from './app/state/sale/sale.reducer';
+import { categoryReducer } from './app/state/categories/categories.reducer';
+import { CategoryEffects } from './app/state/categories/categories.effects';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -27,10 +30,12 @@ bootstrapApplication(AppComponent, {
         sale: saleReducer,
         products: productReducer,
         product: singleProductReducer,
+        categories: categoryReducer,
+        productsbycategory: productsByCategoryReducer,
       }),
       StoreRouterConnectingModule.forRoot(),
       StoreDevtoolsModule.instrument(),
-      EffectsModule.forRoot([ProductsEffects])
+      EffectsModule.forRoot([ProductsEffects, CategoryEffects])
     ),
   ],
 });

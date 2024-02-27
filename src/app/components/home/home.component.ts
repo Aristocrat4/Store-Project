@@ -4,14 +4,11 @@ import { CardComponent } from '../../ui/card/card.component';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import {
-  loadProducts,
-  loadSingleProduct,
-} from '../../state/products/products.actions';
+import { loadProducts } from '../../state/products/products.actions';
 import { selectProducts } from '../../state/products/products.selectors';
 import { Product, ProductState } from '../../state/products/products.model';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { Observable, delay } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',

@@ -20,17 +20,18 @@
         </a>
       </div>
     </div>
-    <div class="flex gap-x-12 max-md:hidden">
-      <a href="#" class="text-sm font-semibold leading-6 text-gray-900">MEN</a>
-      <a href="#" class="text-sm font-semibold leading-6 text-gray-900"
-        >WOMEN</a
-      >
-      <a href="#" class="text-sm font-semibold leading-6 text-gray-900"
-        >ACCESSORIES</a
-      >
-      <a href="#" class="text-sm font-semibold leading-6 text-gray-900"
-        >UNISEX</a
-      >
+    <div class="flex gap-x-12 max-md:hidden items-center justify-center">
+      <div class="flex gap-5">
+        <div
+          *ngFor="let item of (categories$ | async)?.categories"
+          (click)="onCategory(item)"
+        >
+          <a
+            class="text-base font-semibold leading-6 text-gray-900 uppercase cursor-pointer"
+            >{{ item }}</a
+          >
+        </div>
+      </div>
     </div>
     <div class="flex md:items-center gap-2 lg:flex lg:flex-1 lg:justify-end">
       <div
